@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get a Quote — Petaluma Glass Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ── FORM LAYOUT ── */
+  .form-section { padding: 4rem 2rem 6rem; }
+  .form-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  /* ── THE FORM ── */
+  .the-form {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    padding: 3rem;
+  }
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 900; margin-bottom: 0.4rem;
+  }
+  .form-sub {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.9rem; color: var(--warm-gray); line-height: 1.6; margin-bottom: 2.5rem;
+  }
+  .form-section-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--rust);
+    margin-bottom: 1.25rem; margin-top: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .form-section-label:first-of-type { margin-top: 0; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--slate); margin-bottom: 0.4rem;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--rust); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-group .hint { font-size: 0.75rem; color: var(--warm-gray); margin-top: 0.3rem; }
+
+  /* ── RADIO / CHECKBOX ── */
+  .option-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+  .option-group label {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .option-group label:hover { border-color: var(--rust); }
+  .option-group input[type="radio"],
+  .option-group input[type="checkbox"] { width: auto; accent-color: var(--rust); }
+  .option-group input:checked + span { color: var(--rust); font-weight: 600; }
+
+  .form-submit {
+    width: 100%;
+    padding: 1.1rem;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border: none; cursor: pointer;
+    transition: background 0.25s;
+    margin-top: 1rem;
+  }
+  .form-submit:hover { background: var(--rust); }
+  .form-note {
+    font-size: 0.78rem; color: var(--warm-gray);
+    text-align: center; margin-top: 1rem; line-height: 1.5;
+  }
+
+  /* ── SUCCESS STATE ── */
+  .form-success { display: none; text-align: center; padding: 3rem 2rem; }
+  .form-success .check {
+    width: 64px; height: 64px;
+    border: 3px solid var(--rust);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.5rem; color: var(--rust);
+  }
+  .form-success h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 900; margin-bottom: 0.75rem;
+  }
+  .form-success p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem; line-height: 1.7; color: var(--warm-gray);
+    max-width: 400px; margin: 0 auto;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar { position: sticky; top: 6rem; }
+  .sidebar-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .sidebar-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;
+  }
+  .sidebar-card p { font-size: 0.88rem; line-height: 1.65; color: var(--warm-gray); margin-bottom: 0.75rem; }
+  .sidebar-card p:last-child { margin-bottom: 0; }
+
+  .expect-list { list-style: none; }
+  .expect-list li {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    font-size: 0.88rem; line-height: 1.55; color: var(--slate);
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(214, 206, 188, 0.5);
+  }
+  .expect-list li:last-child { border-bottom: none; }
+  .expect-list .step-badge {
+    width: 24px; height: 24px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    font-size: 0.7rem; font-weight: 700; color: var(--rust);
+  }
+
+  .contact-line { display: flex; gap: 0.75rem; align-items: center; padding: 0.6rem 0; }
+  .contact-line .icon { font-size: 1rem; }
+  .contact-line span { font-size: 0.88rem; color: var(--slate); }
+  .contact-line a {
+    font-size: 0.88rem; color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid var(--border); transition: border-color 0.2s;
+  }
+  .contact-line a:hover { border-color: var(--rust); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .form-layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+    .form-row { grid-template-columns: 1fr; }
+    .option-group { grid-template-columns: 1fr; }
+    .the-form { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Petaluma <span>Glass</span> Works</a>
+  <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="work.html">Work</a>
+    <a href="quote.html" class="nav-cta active">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- ═══════ PAGE HERO ═══════ -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="hero-tag">Free Estimate</div>
+    <h1>Let's Talk<br><em>Glass</em></h1>
+    <p>Tell me what you're looking for and I'll get back to you within 24 hours with ideas, questions, or a quote. No pressure — just a conversation.</p>
+  </div>
+</div>
+
+<!-- ═══════ FORM SECTION ═══════ -->
+<div class="form-section">
+  <div class="form-layout">
+
+    <div class="reveal">
+      <div class="the-form" id="quoteForm">
+        <div class="form-title">Request a Quote</div>
+        <p class="form-sub">Fill out what you can — the more detail, the faster I can get you an accurate estimate. But don't worry if you're still figuring things out.</p>
+
+        <div class="form-section-label">Your Info</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" placeholder="Doe" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" placeholder="you@email.com" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone (Optional)</label>
+            <input type="tel" placeholder="(707) 555-0000">
+          </div>
+          <div class="form-group">
+            <label>Preferred Contact</label>
+            <select>
+              <option>Email</option>
+              <option>Phone</option>
+              <option>Text</option>
+              <option>No preference</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-section-label">Project Details</div>
+        <div class="form-group">
+          <label>What type of project?</label>
+        </div>
+        <div class="option-group">
+          <label><input type="radio" name="type" value="mirror"> <span>Mirror / Panel</span></label>
+          <label><input type="radio" name="type" value="wedding"> <span>Wedding / Event</span></label>
+          <label><input type="radio" name="type" value="award"> <span>Award / Trophy</span></label>
+          <label><input type="radio" name="type" value="gift"> <span>Gift / Keepsake</span></label>
+          <label><input type="radio" name="type" value="bar"> <span>Home Bar / Garage</span></label>
+          <label><input type="radio" name="type" value="other"> <span>Other / Not Sure</span></label>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Quantity</label>
+            <select>
+              <option value="">Select...</option>
+              <option>Single piece</option>
+              <option>2 – 10 pieces</option>
+              <option>11 – 50 pieces</option>
+              <option>51 – 100 pieces</option>
+              <option>100+ pieces</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Budget Range</label>
+            <select>
+              <option value="">Select...</option>
+              <option>Under $100</option>
+              <option>$100 – $500</option>
+              <option>$500 – $1,000</option>
+              <option>$1,000 – $2,500</option>
+              <option>$2,500+</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Tell Me About Your Project *</label>
+          <textarea placeholder="What are you looking for? Any design ideas, sizing, or inspiration? The more you share, the better I can help." required></textarea>
+          <div class="hint">Examples: "Mirror for my garage with a '69 Camaro silhouette" or "100 champagne flutes with our monogram for October 15th wedding"</div>
+        </div>
+
+        <div class="form-section-label">Timeline</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Event / Need-by Date</label>
+            <input type="date">
+            <div class="hint">Leave blank if no hard deadline</div>
+          </div>
+          <div class="form-group">
+            <label>How soon do you need it?</label>
+            <select>
+              <option value="">Select...</option>
+              <option>ASAP / Rush</option>
+              <option>Within 2 weeks</option>
+              <option>Within a month</option>
+              <option>2 – 3 months out</option>
+              <option>No rush — just exploring</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-section-label">Anything Else</div>
+        <div class="form-group">
+          <label>Additional Notes (Optional)</label>
+          <textarea placeholder="Reference images, links, special requirements, questions — anything helps." style="min-height:80px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label>How did you hear about us?</label>
+          <select>
+            <option value="">Select...</option>
+            <option>Instagram</option>
+            <option>Google Search</option>
+            <option>Word of mouth / Referral</option>
+            <option>Saw my work somewhere</option>
+            <option>Repeat client</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <button class="form-submit" onclick="submitForm()">Send My Request →</button>
+        <p class="form-note">Free estimates. No obligation. I typically respond within 24 hours.</p>
+      </div>
+
+      <div class="the-form form-success" id="formSuccess">
+        <div class="check">✓</div>
+        <h3>Request Sent!</h3>
+        <p>Thanks for reaching out. I'll review your project details and get back to you within 24 hours — usually sooner. Keep an eye on your inbox.</p>
+        <p style="margin-top:1.5rem; font-size:0.85rem; color:var(--slate);">In the meantime, check out some <a href="work.html" style="color:var(--rust);">recent work</a> for inspiration.</p>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar reveal">
+      <div class="sidebar-card">
+        <h3>What to Expect</h3>
+        <ul class="expect-list">
+          <li>
+            <span class="step-badge">1</span>
+            <span><strong>You send this form.</strong> Include as much or as little detail as you have right now.</span>
+          </li>
+          <li>
+            <span class="step-badge">2</span>
+            <span><strong>I respond within 24 hours</strong> with questions, ideas, or a ballpark quote.</span>
+          </li>
+          <li>
+            <span class="step-badge">3</span>
+            <span><strong>We refine the details</strong> together until you're happy with the plan and price.</span>
+          </li>
+          <li>
+            <span class="step-badge">4</span>
+            <span><strong>I get to work</strong> once you give the green light. You'll see a proof before I start etching.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Prefer to Just Talk?</h3>
+        <p>If forms aren't your thing, reach out directly. I'm happy to chat through your project over the phone or email.</p>
+        <div style="margin-top:1rem;">
+          <div class="contact-line">
+            <span class="icon">📧</span>
+            <a href="mailto:hello@petalumaglassworks.com">hello@petalumaglassworks.com</a>
+          </div>
+          <div class="contact-line">
+            <span class="icon">📱</span>
+            <a href="tel:+17075551234">(707) 555-1234</a>
+          </div>
+          <div class="contact-line">
+            <span class="icon">📸</span>
+            <a href="#">@petalumaglassworks</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card" style="background:var(--ink); color:var(--cream); border-color:var(--ink);">
+        <h3 style="color:var(--cream);">Quick Reference</h3>
+        <p style="color:rgba(245,240,232,0.65);">Rough starting prices to help you plan. Actual quotes depend on design complexity, size, and quantity.</p>
+        <div style="margin-top:1rem; display:flex; flex-direction:column; gap:0.6rem;">
+          <div style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid rgba(245,240,232,0.1);">
+            <span style="color:rgba(245,240,232,0.65); font-size:0.85rem;">Single glass / gift</span>
+            <span style="font-weight:600; font-size:0.85rem;">From $35</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid rgba(245,240,232,0.1);">
+            <span style="color:rgba(245,240,232,0.65); font-size:0.85rem;">Award / trophy</span>
+            <span style="font-weight:600; font-size:0.85rem;">From $75</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:0.5rem 0; border-bottom:1px solid rgba(245,240,232,0.1);">
+            <span style="color:rgba(245,240,232,0.65); font-size:0.85rem;">Mirror / panel</span>
+            <span style="font-weight:600; font-size:0.85rem;">From $300</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:0.5rem 0;">
+            <span style="color:rgba(245,240,232,0.65); font-size:0.85rem;">Wedding set (50+)</span>
+            <span style="font-weight:600; font-size:0.85rem;">From $500</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Petaluma <span>Glass</span> Works</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="work.html">Work</a>
+    </div>
+    <div class="footer-copy">© 2026 Petaluma Glass Works. Handmade in Sonoma County.</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  function submitForm() {
+    document.getElementById('quoteForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>

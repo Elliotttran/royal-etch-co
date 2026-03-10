@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Petaluma Glass Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ── STORY ── */
+  .story-section { background: var(--warm-white); }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .story-photo {
+    aspect-ratio: 3/4;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    position: sticky;
+    top: 6rem;
+  }
+  .story-photo .placeholder-pattern {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image:
+      repeating-linear-gradient(45deg, var(--cream) 0px, var(--cream) 1px, transparent 1px, transparent 12px);
+  }
+  .story-photo .photo-label {
+    position: absolute; bottom: 1.25rem; left: 1.25rem;
+    color: var(--cream); font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5;
+  }
+  .story-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.6rem);
+    font-weight: 900; line-height: 1.15; margin-bottom: 2rem;
+  }
+  .story-text h2 em { font-weight: 400; color: var(--rust); }
+  .story-text p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem; line-height: 1.9; color: var(--slate); margin-bottom: 1.5rem;
+  }
+  .story-text .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-style: italic;
+    color: var(--ink); line-height: 1.5;
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    border-left: 3px solid var(--rust);
+    margin: 2rem 0;
+  }
+
+  /* ── VALUES ── */
+  .values-section { background: var(--cream); }
+  .values-header { text-align: center; margin-bottom: 3rem; }
+  .values-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 900; line-height: 1.15;
+  }
+  .values-header h2 em { font-weight: 400; color: var(--rust); }
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .value-card {
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--border);
+    background: var(--warm-white);
+    text-align: center;
+  }
+  .value-icon {
+    width: 56px; height: 56px;
+    margin: 0 auto 1.25rem;
+    border: 2px solid var(--rust);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .value-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; margin-bottom: 0.6rem;
+  }
+  .value-card p { font-size: 0.88rem; line-height: 1.65; color: var(--warm-gray); }
+
+  /* ── WORKSHOP GALLERY ── */
+  .workshop-section { background: var(--warm-white); }
+  .workshop-header { text-align: center; margin-bottom: 2.5rem; }
+  .workshop-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 900; line-height: 1.15;
+  }
+  .workshop-header h2 em { font-weight: 400; color: var(--rust); }
+  .workshop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+  .workshop-img {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    min-height: 220px;
+  }
+  .workshop-img.tall { grid-row: span 2; }
+  .workshop-img .placeholder-pattern {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image:
+      repeating-linear-gradient(60deg, var(--cream) 0px, var(--cream) 1px, transparent 1px, transparent 16px);
+  }
+  .workshop-img .img-label {
+    position: absolute; bottom: 0.75rem; left: 0.75rem;
+    color: var(--cream); font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.4;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section { background: var(--cream); }
+  .testimonials-header { text-align: center; margin-bottom: 3rem; }
+  .testimonials-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 900;
+  }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .testimonial-card {
+    padding: 2rem;
+    border: 1px solid var(--border);
+    background: var(--warm-white);
+  }
+  .testimonial-card .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+  .testimonial-card blockquote {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem; line-height: 1.7;
+    color: var(--slate); font-style: italic; margin-bottom: 1.25rem;
+  }
+  .testimonial-card cite {
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal; font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm-gray);
+  }
+  .testimonial-card .project-type {
+    font-size: 0.7rem; color: var(--rust); font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-top: 0.25rem; display: block;
+  }
+
+  /* ── LOCAL ROOTS ── */
+  .local-section {
+    background: var(--ink); color: var(--cream);
+    text-align: center; padding: 5rem 2rem;
+  }
+  .local-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; margin-bottom: 1rem;
+  }
+  .local-section h2 em { font-weight: 400; color: var(--rust-light); }
+  .local-section p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem; line-height: 1.8;
+    color: rgba(245, 240, 232, 0.65);
+    max-width: 600px; margin: 0 auto 1rem;
+  }
+  .local-tags { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+  .local-tags .tag {
+    padding: 0.45rem 1rem;
+    border: 1px solid rgba(245, 240, 232, 0.15);
+    font-size: 0.78rem; font-weight: 500;
+    color: rgba(245, 240, 232, 0.6);
+  }
+
+  /* ── CTA BAND ── */
+  .cta-band { background: var(--warm-white); text-align: center; padding: 5rem 2rem; }
+  .cta-band h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900;
+    color: var(--ink); line-height: 1.15; margin-bottom: 1rem;
+  }
+  .cta-band h2 em { font-weight: 400; color: var(--rust); }
+  .cta-band p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem; color: var(--warm-gray);
+    max-width: 480px; margin: 0 auto 2rem; line-height: 1.7;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .story-grid { grid-template-columns: 1fr; }
+    .story-photo { position: static; max-height: 350px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .workshop-grid { grid-template-columns: 1fr 1fr; }
+    .workshop-img.tall { grid-row: span 1; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Petaluma <span>Glass</span> Works</a>
+  <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="services.html">Services</a>
+    <a href="about.html" class="active">About</a>
+    <a href="work.html">Work</a>
+    <a href="quote.html" class="nav-cta">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- ═══════ PAGE HERO ═══════ -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="hero-tag">The Maker</div>
+    <h1>One Person,<br><em>One Workshop</em></h1>
+    <p>Every piece that leaves my shop has my name on it — and I take that personally. Here's the story behind the glass.</p>
+  </div>
+</div>
+
+<!-- ═══════ STORY ═══════ -->
+<section class="story-section">
+  <div class="section-inner">
+    <div class="story-grid">
+      <div class="story-photo reveal">
+        <div class="placeholder-pattern"></div>
+        <div class="photo-label">— Your portrait here —</div>
+      </div>
+      <div class="story-text reveal">
+        <div class="section-label">My Story</div>
+        <h2>From First Etch to<br><em>Full-Time Craft</em></h2>
+        <p>I started glass etching as a hobby — a way to make something with my hands that wasn't on a screen. The first piece was a pint glass with a buddy's car on it. He put it on his bar, his friends asked where he got it, and before I knew it I had a waiting list.</p>
+        <p>That was the beginning of Petaluma Glass Works. What started as weekend projects in my garage turned into a full workshop and a growing roster of clients across Sonoma County and beyond.</p>
+        <div class="pull-quote">
+          "I don't do templates or mass production. Every piece is designed and etched individually — that's the whole point."
+        </div>
+        <p>I work with car guys who want a statement piece for their garage. I work with brides who want personalized glassware for their vineyard wedding. I work with businesses that need awards that don't look like they came from a catalog. The common thread is that every client wants something that's actually <em>theirs</em>.</p>
+        <p>My workshop is right here in Petaluma. I meet with clients locally, and I ship carefully packed orders to folks further out. Whether it's a single etched rocks glass or a 200-piece wedding set, I give it the same level of care and attention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ VALUES ═══════ -->
+<section class="values-section">
+  <div class="section-inner">
+    <div class="values-header reveal">
+      <div class="section-label">What I Stand For</div>
+      <h2>Built on <em>Craft</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="value-icon">✦</div>
+        <h3>Quality Over Speed</h3>
+        <p>I'd rather take an extra day and get it right than rush something out the door. Every piece gets inspected, polished, and packed with care.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">◈</div>
+        <h3>Direct & Personal</h3>
+        <p>You work with me — not a sales team, not a call center. I answer every email, take every call, and design every piece personally.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">⬡</div>
+        <h3>Honest Pricing</h3>
+        <p>I quote what it costs and I stick to it. No hidden fees, no upsells. If something changes scope, we talk about it first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ WORKSHOP GALLERY ═══════ -->
+<section class="workshop-section">
+  <div class="section-inner">
+    <div class="workshop-header reveal">
+      <div class="section-label">Behind the Scenes</div>
+      <h2>The <em>Workshop</em></h2>
+    </div>
+    <div class="workshop-grid">
+      <div class="workshop-img tall reveal">
+        <div class="placeholder-pattern"></div>
+        <div class="img-label">Workshop wide shot</div>
+      </div>
+      <div class="workshop-img reveal">
+        <div class="placeholder-pattern"></div>
+        <div class="img-label">Etching close-up</div>
+      </div>
+      <div class="workshop-img reveal">
+        <div class="placeholder-pattern"></div>
+        <div class="img-label">Tools of the trade</div>
+      </div>
+      <div class="workshop-img reveal">
+        <div class="placeholder-pattern"></div>
+        <div class="img-label">Finished pieces</div>
+      </div>
+      <div class="workshop-img reveal">
+        <div class="placeholder-pattern"></div>
+        <div class="img-label">Detail work</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TESTIMONIALS ═══════ -->
+<section class="testimonials-section">
+  <div class="section-inner">
+    <div class="testimonials-header reveal">
+      <div class="section-label">Kind Words</div>
+      <h2>What Clients Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"He absolutely nailed the etching on our garage mirror. Every guy who walks in asks where I got it. The detail on the car silhouette is unreal."</blockquote>
+        <cite>— Mike R., Petaluma</cite>
+        <span class="project-type">Garage Mirror</span>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"We ordered 180 champagne flutes for our wedding and every single one was perfect. He even hand-delivered them to the venue. Above and beyond."</blockquote>
+        <cite>— Sarah & David C., Sonoma</cite>
+        <span class="project-type">Wedding Glassware</span>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Got a custom decanter made for my dad's 70th birthday with his favorite fishing spot etched on it. He teared up. Worth every penny."</blockquote>
+        <cite>— Jason T., Santa Rosa</cite>
+        <span class="project-type">Custom Gift</span>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"We've used him for three years of car show trophies now. The winners love them — way better than the generic stuff we used to hand out."</blockquote>
+        <cite>— Sonoma County Car Club</cite>
+        <span class="project-type">Awards & Trophies</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ LOCAL ROOTS ═══════ -->
+<div class="local-section">
+  <h2>Proudly <em>Petaluma</em></h2>
+  <p>Born and raised in Sonoma County. My workshop is here, my clients are here, and my roots are here. I'm proud to serve the community I grew up in.</p>
+  <p>Serving the entire region and shipping throughout California.</p>
+  <div class="local-tags">
+    <span class="tag">Petaluma</span>
+    <span class="tag">Sonoma</span>
+    <span class="tag">Santa Rosa</span>
+    <span class="tag">Napa</span>
+    <span class="tag">Rohnert Park</span>
+    <span class="tag">Cotati</span>
+    <span class="tag">Novato</span>
+    <span class="tag">Sebastopol</span>
+    <span class="tag">Healdsburg</span>
+    <span class="tag">Windsor</span>
+  </div>
+</div>
+
+<!-- ═══════ CTA ═══════ -->
+<div class="cta-band">
+  <h2>Ready to <em>Start?</em></h2>
+  <p>I'd love to hear about your project. Reach out for a free quote — no pressure, no commitment.</p>
+  <a href="quote.html" class="btn-primary">Request a Quote →</a>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Petaluma <span>Glass</span> Works</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="quote.html">Quote</a>
+    </div>
+    <div class="footer-copy">© 2026 Petaluma Glass Works. Handmade in Sonoma County.</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

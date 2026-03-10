@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Petaluma Glass Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ── SERVICE BLOCKS ── */
+  .service-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .service-block:last-child { border-bottom: none; }
+  .service-block.reverse .service-visual { order: 2; }
+  .service-block.reverse .service-content { order: 1; }
+  .service-visual {
+    aspect-ratio: 4/3;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .service-visual .placeholder-pattern {
+    position: absolute; inset: 0; opacity: 0.06;
+    background-image:
+      repeating-linear-gradient(45deg, var(--cream) 0px, var(--cream) 1px, transparent 1px, transparent 14px);
+  }
+  .service-visual .icon { font-size: 4rem; opacity: 0.2; color: var(--cream); position: relative; z-index: 1; }
+  .service-visual .tag {
+    position: absolute; top: 1rem; left: 1rem;
+    background: var(--rust); color: var(--cream);
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.3rem 0.7rem;
+  }
+  .service-content .service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 0.75rem;
+  }
+  .service-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.2;
+  }
+  .service-content p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem; line-height: 1.8; color: var(--slate); margin-bottom: 1rem;
+  }
+  .service-examples { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+  .service-examples .chip {
+    padding: 0.4rem 0.9rem;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    font-size: 0.78rem; font-weight: 500; color: var(--slate);
+  }
+
+  /* ── PROCESS ── */
+  .process-section { background: var(--warm-white); }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .process-step { text-align: center; padding: 2rem 1.5rem; position: relative; }
+  .process-step::after {
+    content: '→';
+    position: absolute;
+    right: -1.2rem; top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem; color: var(--border);
+  }
+  .process-step:last-child::after { display: none; }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px; height: 48px;
+    border: 2px solid var(--rust);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 900; color: var(--rust);
+    margin-bottom: 1.25rem;
+  }
+  .process-step h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;
+  }
+  .process-step p { font-size: 0.85rem; line-height: 1.6; color: var(--warm-gray); }
+
+  /* ── PRICING ── */
+  .pricing-note { background: var(--ink); color: var(--cream); padding: 4rem 2rem; text-align: center; }
+  .pricing-note-inner { max-width: 650px; margin: 0 auto; }
+  .pricing-note h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 900; margin-bottom: 1rem;
+  }
+  .pricing-note p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem; line-height: 1.8;
+    color: rgba(245, 240, 232, 0.7); margin-bottom: 1.5rem;
+  }
+  .pricing-examples {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .price-card { border: 1px solid rgba(245, 240, 232, 0.12); padding: 1.5rem; text-align: center; }
+  .price-card .type {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--rust-light); margin-bottom: 0.5rem;
+  }
+  .price-card .range {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900; margin-bottom: 0.3rem;
+  }
+  .price-card .note { font-size: 0.78rem; color: rgba(245, 240, 232, 0.5); }
+
+  /* ── FAQ ── */
+  .faq-section { background: var(--cream); }
+  .faq-list { max-width: 720px; margin: 2rem auto 0; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 1.5rem 0; }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; gap: 1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; line-height: 1.3;
+  }
+  .faq-q .toggle { font-size: 1.5rem; color: var(--rust); flex-shrink: 0; transition: transform 0.3s; }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+  .faq-a p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.92rem; line-height: 1.8; color: var(--slate); padding-top: 1rem;
+  }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-item.open .toggle { transform: rotate(45deg); }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--ink); text-align: center; padding: 5rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(160, 82, 45, 0.12) 0%, transparent 70%);
+  }
+  .cta-band-content { position: relative; z-index: 2; }
+  .cta-band h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900;
+    color: var(--cream); line-height: 1.15; margin-bottom: 1rem;
+  }
+  .cta-band h2 em { font-weight: 400; color: var(--rust-light); }
+  .cta-band p {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem; color: rgba(245, 240, 232, 0.6);
+    max-width: 480px; margin: 0 auto 2rem; line-height: 1.7;
+  }
+  .cta-band .btn-primary { background: var(--rust); }
+  .cta-band .btn-primary:hover { background: var(--rust-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .service-block { grid-template-columns: 1fr; gap: 2rem; }
+    .service-block.reverse .service-visual,
+    .service-block.reverse .service-content { order: unset; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .process-step::after { display: none; }
+    .pricing-examples { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Petaluma <span>Glass</span> Works</a>
+  <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="services.html" class="active">Services</a>
+    <a href="about.html">About</a>
+    <a href="work.html">Work</a>
+    <a href="quote.html" class="nav-cta">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- ═══════ PAGE HERO ═══════ -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="hero-tag">What I Offer</div>
+    <h1>Custom Glass,<br><em>Your Vision</em></h1>
+    <p>From a single etched pint glass to a full garage mirror install — everything is made to order, by hand, right here in Petaluma.</p>
+  </div>
+</div>
+
+<!-- ═══════ SERVICE BLOCKS ═══════ -->
+<section>
+  <div class="section-inner">
+
+    <div class="service-block reveal">
+      <div class="service-visual">
+        <div class="placeholder-pattern"></div>
+        <span class="icon">🪞</span>
+        <span class="tag">Most Popular</span>
+      </div>
+      <div class="service-content">
+        <div class="service-num">01</div>
+        <h2>Custom Mirrors & Glass Panels</h2>
+        <p>Large-format etched mirrors and glass panels designed to be the centerpiece of your space. I work with you on the design — whether it's your car, your logo, a family crest, or something totally original — then etch it permanently into high-quality glass.</p>
+        <p>Available in standard and custom sizes. I can also do on-site measurement and installation for local jobs.</p>
+        <div class="service-examples">
+          <span class="chip">Garage mirrors</span>
+          <span class="chip">Home bar backdrops</span>
+          <span class="chip">Entryway transoms</span>
+          <span class="chip">Business signage</span>
+          <span class="chip">Shower doors</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-block reverse reveal">
+      <div class="service-visual">
+        <div class="placeholder-pattern"></div>
+        <span class="icon">🥂</span>
+      </div>
+      <div class="service-content">
+        <div class="service-num">02</div>
+        <h2>Wedding & Event Glassware</h2>
+        <p>Make your event unforgettable with custom etched glassware. I handle everything from initial design to delivering the finished sets — monograms, dates, custom artwork, you name it. I've done intimate dinners of 20 and receptions of 200+.</p>
+        <p>Perfect for Sonoma County vineyard weddings, rehearsal dinners, engagement parties, and milestone celebrations. Bulk discounts available for large orders.</p>
+        <div class="service-examples">
+          <span class="chip">Champagne flutes</span>
+          <span class="chip">Wine glasses</span>
+          <span class="chip">Welcome signs</span>
+          <span class="chip">Table numbers</span>
+          <span class="chip">Unity ceremony glass</span>
+          <span class="chip">Party favors</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-block reveal">
+      <div class="service-visual">
+        <div class="placeholder-pattern"></div>
+        <span class="icon">🏆</span>
+      </div>
+      <div class="service-content">
+        <div class="service-num">03</div>
+        <h2>Awards, Trophies & Recognition</h2>
+        <p>Custom etched glass awards that actually look like someone put thought into them. Whether it's a car show trophy, a corporate recognition piece, or a commemorative plaque — I design and etch each one individually.</p>
+        <p>I work with car clubs, businesses, nonprofits, and event organizers throughout Sonoma County and the greater Bay Area.</p>
+        <div class="service-examples">
+          <span class="chip">Car show trophies</span>
+          <span class="chip">Employee awards</span>
+          <span class="chip">Competition plaques</span>
+          <span class="chip">Memorial pieces</span>
+          <span class="chip">Retirement gifts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-block reverse reveal">
+      <div class="service-visual">
+        <div class="placeholder-pattern"></div>
+        <span class="icon">🎁</span>
+      </div>
+      <div class="service-content">
+        <div class="service-num">04</div>
+        <h2>Gifts & One-of-a-Kind Pieces</h2>
+        <p>Sometimes you just need something special for someone who's impossible to buy for. I do single custom pieces — decanters, picture frames, vases, drinkware, ornamental panels — etched with whatever makes it meaningful.</p>
+        <p>Great for birthdays, anniversaries, Father's Day, Christmas, housewarmings, or just because.</p>
+        <div class="service-examples">
+          <span class="chip">Decanters</span>
+          <span class="chip">Pint glasses</span>
+          <span class="chip">Picture frames</span>
+          <span class="chip">Vases</span>
+          <span class="chip">Ornamental pieces</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════ PROCESS ═══════ -->
+<section class="process-section">
+  <div class="section-inner" style="text-align:center;">
+    <div class="reveal">
+      <div class="section-label">How It Works</div>
+      <div class="section-title" style="margin:0 auto 0.5rem;">From Idea to Glass</div>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="step-num">1</div>
+        <h3>We Talk</h3>
+        <p>Reach out with your idea — even if it's rough. We'll discuss what you're looking for, sizing, timeline, and budget.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">2</div>
+        <h3>I Design</h3>
+        <p>I create a mockup or proof for your approval. Revisions are part of the process — I want you to love it before I start etching.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">3</div>
+        <h3>I Etch</h3>
+        <p>Using professional-grade tools, I hand-etch your design into the glass. Every piece gets individual attention and quality checks.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">4</div>
+        <h3>You Get It</h3>
+        <p>Local pickup in Petaluma, delivery within Sonoma County, or careful shipping for orders further out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PRICING ═══════ -->
+<div class="pricing-note">
+  <div class="pricing-note-inner">
+    <h2>Pricing That Makes Sense</h2>
+    <p>Every project is different, so I quote individually based on complexity, size, and quantity. Here are some ballpark ranges to give you an idea — but the best way to get an accurate price is to reach out.</p>
+    <div class="pricing-examples">
+      <div class="price-card">
+        <div class="type">Single Glass / Gift</div>
+        <div class="range">$35 – $150</div>
+        <div class="note">Pint glasses, wine glasses, small items</div>
+      </div>
+      <div class="price-card">
+        <div class="type">Event / Wedding Sets</div>
+        <div class="range">$500 – $3,000+</div>
+        <div class="note">Bulk glassware, signage, favors</div>
+      </div>
+      <div class="price-card">
+        <div class="type">Mirrors & Panels</div>
+        <div class="range">$300 – $2,500+</div>
+        <div class="note">Size and complexity dependent</div>
+      </div>
+    </div>
+    <p style="font-size:0.85rem; opacity:0.5;">Free estimates. No pressure. Just reach out.</p>
+  </div>
+</div>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="faq-section">
+  <div class="section-inner">
+    <div style="text-align:center;" class="reveal">
+      <div class="section-label">Common Questions</div>
+      <div class="section-title">FAQ</div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          How long does a typical project take?
+          <span class="toggle">+</span>
+        </div>
+        <div class="faq-a">
+          <p>Small items (single glasses, gifts) usually take 1–2 weeks. Larger projects like mirrors or event sets typically take 3–6 weeks depending on complexity. If you're on a tight timeline, let me know — I'll do my best to accommodate rush orders.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Can I provide my own glass or glassware?
+          <span class="toggle">+</span>
+        </div>
+        <div class="faq-a">
+          <p>Absolutely. If you've got a specific piece or set you want etched, I'm happy to work with it. I can also source glass and glassware for you if you don't have something in mind — I work with several suppliers and can get most styles.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Do you do installation for larger pieces?
+          <span class="toggle">+</span>
+        </div>
+        <div class="faq-a">
+          <p>Yes — for local Petaluma and Sonoma County jobs, I offer on-site measurement and installation for mirrors and panels. I'll come out, measure your space, and install the finished piece. For projects outside the county, I arrange careful shipping with full insurance.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          What if I don't have a design in mind?
+          <span class="toggle">+</span>
+        </div>
+        <div class="faq-a">
+          <p>That's totally fine — most people don't. I'll work with you to develop a concept. Just tell me what the piece is for, where it's going, and any ideas you have (even vague ones), and I'll take it from there with mockups and proofs until we land on something you love.</p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Do you work outside of Sonoma County?
+          <span class="toggle">+</span>
+        </div>
+        <div class="faq-a">
+          <p>Yes. While I'm based in Petaluma and most of my clients are in Sonoma County, I ship throughout California and beyond. For larger or fragile pieces, I use custom crating and fully insured shipping. Event work is primarily local.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<div class="cta-band">
+  <div class="cta-band-content">
+    <h2>Have a Project <em>in Mind?</em></h2>
+    <p>Tell me what you're thinking. Free estimates, no pressure, and I usually respond within 24 hours.</p>
+    <a href="quote.html" class="btn-primary">Request a Quote →</a>
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Petaluma <span>Glass</span> Works</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="quote.html">Quote</a>
+    </div>
+    <div class="footer-copy">© 2026 Petaluma Glass Works. Handmade in Sonoma County.</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
